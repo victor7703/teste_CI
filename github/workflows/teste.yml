@@ -1,0 +1,26 @@
+name: Testes Automáticos CI  # Nome do workflow
+
+on: [push]  # Executa ao fazer git push
+
+jobs:
+  testar-python:
+    runs-on: ubuntu-latest  # Roda em um servidor Linux
+
+    steps:
+      # 1. Baixa seu código
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # 2. Instala Python
+      - name: Instalar Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.10"
+
+      # 3. Instala dependências (opcional)
+      - name: Instalar pytest
+        run: pip install pytest
+
+      # 4. Roda testes
+      - name: Rodar testes
+        run: pytest test_main.py -v
